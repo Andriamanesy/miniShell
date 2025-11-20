@@ -1,18 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/18 15:12:01 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/19 08:08:17 by briandri         ###   ########.fr       */
+/*   Created: 2025/11/19 07:53:52 by briandri          #+#    #+#             */
+/*   Updated: 2025/11/19 07:53:54 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(int ac, char *av[])
-{
-	(void) ac;
-	(void) av;
-	return (0);
-}
+
