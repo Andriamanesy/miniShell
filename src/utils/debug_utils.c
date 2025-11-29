@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:56:02 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/19 07:56:04 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:44:34 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../../include/utils.h"

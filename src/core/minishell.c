@@ -6,11 +6,14 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:38:49 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/29 13:12:46 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 14:36:01 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../../include/lexer.h"
+#include "../../include/parser.h"
+#include "../../include/executor.h"
 
 void    process_input(char *line, t_env *env);
 void    handle_exit(t_env *env);
@@ -36,10 +39,15 @@ int    minishell(char **envp)
     return (0);
 }
 
-void    process_input(char *line, t_env *env)
+void process_input(char *line, t_env *env)
 {
-    (void) env;
-    printf("You entered %s\n", line);
+    t_token *tokens = lexer(line);
+    t_ast   *ast    = parse(tokens);
+
+    execute(ast, env);
+
+    free_tokens(tokens);
+    free_ast(ast);
 }
 
 void    handle_exit(t_env *env)

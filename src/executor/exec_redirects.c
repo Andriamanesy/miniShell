@@ -3,11 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:53:52 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/19 07:53:54 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:41:25 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/executor.h"
 

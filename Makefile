@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MAKEFILE                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 15:12:07 by briandri          #+#    #+#              #
-#    Updated: 2025/11/18 15:12:16 by briandri         ###   ########.fr        #
+#    Updated: 2025/11/29 15:33:52 by briandri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,15 @@ SRC = \
 	$(SRC_DIR)/lexer/lexer.c \
 	$(SRC_DIR)/lexer/tokenizer.c \
 	$(SRC_DIR)/lexer/token_utils.c \
+	$(SRC_DIR)/lexer/lexer_utils.c \
+	$(SRC_DIR)/lexer/quotes.c \
 	\
 	$(SRC_DIR)/parser/parser.c \
 	$(SRC_DIR)/parser/ast_builder.c \
 	$(SRC_DIR)/parser/parser_utils.c \
+	$(SRC_DIR)/parser/parser_cmd.c \
+	$(SRC_DIR)/parser/parse_redirs.c \
+	$(SRC_DIR)/parser/ast_utils.c \
 	\
 	$(SRC_DIR)/expander/expander.c \
 	$(SRC_DIR)/expander/expand_vars.c \

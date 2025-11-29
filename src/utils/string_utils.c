@@ -3,11 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   string_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:55:35 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/19 07:55:36 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:44:53 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/utils.h"
 

@@ -3,11 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:52:45 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/19 07:52:46 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:41:19 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../include/executor.h"
 
 
