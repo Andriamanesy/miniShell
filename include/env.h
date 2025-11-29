@@ -6,13 +6,13 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:07:54 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/29 10:40:49 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 12:29:57 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
-
+# include "../libft/includes/libft.h"
 typedef struct s_env
 {
     char            *key;
