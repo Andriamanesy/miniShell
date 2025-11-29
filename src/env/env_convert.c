@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   env_convert.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:54:28 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/19 07:54:32 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:42:42 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../../include/env.h"

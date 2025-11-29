@@ -6,7 +6,11 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:08:13 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/18 15:08:14 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:44:46 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
+
+#endif

@@ -6,7 +6,11 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:08:18 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/18 15:08:19 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:45:04 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LEXER_H
+# define LEXER_H
+
+#endif

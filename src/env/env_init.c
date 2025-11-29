@@ -6,7 +6,18 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:09:48 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/18 15:09:50 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:51:36 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/env.h"
+
+t_env   *env_to_list(char **envp)
+{
+
+}
+
+char    **list_to_envp(t_env *env)
+{
+    
+}

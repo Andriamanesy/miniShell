@@ -53,11 +53,9 @@ bonus: $(OBJ) $(OBJ_BONUS)
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo "$(COLOR_Red)Object files cleaned.$(COLOR_Reset)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(COLOR_Red)Library $(NAME) cleaned.$(COLOR_Reset)"
 
 re: fclean all
 

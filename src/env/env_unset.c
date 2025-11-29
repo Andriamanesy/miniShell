@@ -6,7 +6,13 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:09:57 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/18 15:09:59 by briandri         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:49:13 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/env.h"
+
+void    unset_env(t_env **env, char *key)
+{
+    
+}

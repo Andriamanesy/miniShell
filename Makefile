@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    MAKEFILE                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/18 15:12:07 by briandri          #+#    #+#              #
-#    Updated: 2025/11/20 11:41:40 by briandri         ###   ########.fr        #
+#    Updated: 2025/11/18 15:12:16 by briandri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,29 +25,19 @@ SRC = \
 	$(SRC_DIR)/lexer/lexer.c \
 	$(SRC_DIR)/lexer/tokenizer.c \
 	$(SRC_DIR)/lexer/token_utils.c \
-	$(SRC_DIR)/lexer/lexer_utils.c \
-	$(SRC_DIR)/lexer/quotes.c \
 	\
 	$(SRC_DIR)/parser/parser.c \
 	$(SRC_DIR)/parser/ast_builder.c \
 	$(SRC_DIR)/parser/parser_utils.c \
-	$(SRC_DIR)/parser/ast_utils.c \
-	$(SRC_DIR)/parser/parse_redirs.c \
-	$(SRC_DIR)/parser/parser_cmd.c \
 	\
 	$(SRC_DIR)/expander/expander.c \
 	$(SRC_DIR)/expander/expand_vars.c \
 	$(SRC_DIR)/expander/expand_wildcards.c \
-	$(SRC_DIR)/expander/expand_utils.c \
 	\
 	$(SRC_DIR)/executor/executor.c \
 	$(SRC_DIR)/executor/exec_command.c \
 	$(SRC_DIR)/executor/exec_pipes.c \
-	$(SRC_DIR)/executor/exec_pipeline.c \
 	$(SRC_DIR)/executor/exec_redirects.c \
-	$(SRC_DIR)/executor/exec_redirs.c \
-	$(SRC_DIR)/executor/exec_utils.c \
-	$(SRC_DIR)/executor/exec.c \
 	\
 	$(SRC_DIR)/builtins/builtin_cd.c \
 	$(SRC_DIR)/builtins/builtin_pwd.c \
@@ -60,16 +50,10 @@ SRC = \
 	$(SRC_DIR)/env/env_init.c \
 	$(SRC_DIR)/env/env_utils.c \
 	$(SRC_DIR)/env/env_convert.c \
-	$(SRC_DIR)/env/env_get.c \
-	$(SRC_DIR)/env/env_set.c \
-	$(SRC_DIR)/env/env_unset.c \
 	\
 	$(SRC_DIR)/utils/memory_utils.c \
 	$(SRC_DIR)/utils/string_utils.c \
-	$(SRC_DIR)/utils/debug_utils.c \
-	$(SRC_DIR)/utils/error_utils.c \
-	$(SRC_DIR)/utils/list_utils.c \
-	$(SRC_DIR)/utils/str_utils.c
+	$(SRC_DIR)/utils/debug_utils.c
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
