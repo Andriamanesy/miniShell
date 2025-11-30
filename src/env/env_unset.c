@@ -12,14 +12,13 @@
 
 #include "../../include/env.h"
 
-void    unset_env(t_env **env, char *key)
+void	unset_env(t_env **env, char *key)
 {
 	t_env	*tmp;
 	t_env	*prev;
 
 	tmp = *env;
 	prev = NULL;
-
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, key) == 0)

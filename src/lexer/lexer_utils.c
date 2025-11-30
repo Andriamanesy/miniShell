@@ -12,13 +12,12 @@
 
 #include "../../include/lexer.h"
 
-int is_whitespace(char c)
+int	is_whitespace(char c)
 {
-    return (c == ' ' || c == '\t');
+	return (c == ' ' || c == '\t');
 }
 
-int is_operator_char(char c)
+int	is_operator_char(char c)
 {
-    return (c == '|' || c == '<' || c == '>');
+	return (c == '|' || c == '<' || c == '>');
 }
-

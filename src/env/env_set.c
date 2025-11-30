@@ -12,19 +12,19 @@
 
 #include "../../include/env.h"
 
-void    set_env(t_env **env, char *key, char *value)
+void	set_env(t_env **env, char *key, char *value)
 {
-	t_env *tmp;
-	t_env *new;
+	t_env	*tmp;
+	t_env	*new;
 
 	tmp = *env;
 	while (tmp)
 	{
-		if(ft_strcmp(tmp->key, key) == 0)
+		if (ft_strcmp(tmp->key, key) == 0)
 		{
 			free(tmp->value);
 			tmp->value = ft_strdup(value);
-			return;
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -33,5 +33,4 @@ void    set_env(t_env **env, char *key, char *value)
 	new->value = ft_strdup(value);
 	new->next = *env;
 	*env = new;
-
 }

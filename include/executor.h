@@ -12,9 +12,9 @@
 
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
+# include "./env.h"
 # include "./parser.h"
-#include "./env.h"
 
-void execute(t_ast *ast, t_env *env);
+void	execute(t_ast *ast, t_env *env);
 
 #endif

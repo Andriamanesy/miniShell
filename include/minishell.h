@@ -12,13 +12,13 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "./env.h"
-#include "../libft/includes/libft.h"
+# include "../libft/includes/libft.h"
+# include "./env.h"
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-int    minishell(char **envp);
+int	minishell(char **envp);
 
 #endif

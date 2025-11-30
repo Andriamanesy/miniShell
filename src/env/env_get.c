@@ -12,19 +12,23 @@
 
 #include "../../include/env.h"
 
-t_env   *get_env_node(t_env *env, char *key)
+t_env	*get_env_node(t_env *env, char *key)
 {
-    while (env)
-    {
-        if (ft_strcmp(env->key, key) == 0)
-            return env;
-        env = env->next;
-    }
-    return NULL;
+	while (env)
+	{
+		if (ft_strcmp(env->key, key) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
 }
 
-char    *get_env_value(t_env *env, char *key)
+char	*get_env_value(t_env *env, char *key)
 {
-    t_env *node = get_env_node(env, key);
-    return node ? node->value : NULL;
+	t_env	*node;
+
+	node = get_env_node(env, key);
+	if (node)
+		return (node->value);
+	return (NULL);
 }

@@ -13,9 +13,9 @@
 #include "../../include/lexer.h"
 #include "../../libft/includes/libft.h"
 
-t_token *lexer(char *input)
+t_token	*lexer(char *input)
 {
-    if (!input)
-        return (NULL);
-    return tokenize(input);    
+	if (!input)
+		return (NULL);
+	return (tokenize(input));
 }
