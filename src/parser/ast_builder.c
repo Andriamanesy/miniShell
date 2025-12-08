@@ -6,57 +6,77 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:42:41 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/30 11:48:34 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/02 09:48:28 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
-#include <stdlib.h>
 
 t_ast	*build_ast(t_token *tokens)
 {
-	t_ast	*root;
-	t_ast	*cmd_node;
-	t_token	*current;
-	t_ast	*new_cmd;
-	t_ast	*pipe_node;
+	t_ast	*root = NULL;
+	t_ast	*attach = NULL;
+	t_ast	*node;
 	t_ast	*redir_node;
 
-	root = NULL;
-	cmd_node = NULL;
-	current = tokens;
-	while (current)
+	while (tokens)
 	{
-		if (current->type == WORD)
+		if (tokens->type == WORD)
 		{
-			new_cmd = build_command_node(&current);
+			node = build_command_node(&tokens);
+			if (!node)
+				return (free_ast(root), NULL);
 			if (!root)
-				root = new_cmd;
-			else
-				cmd_node->right = new_cmd;
-			cmd_node = new_cmd;
-		}
-		else if (current->type == PIPE)
-		{
-			pipe_node = new_ast_node(NODE_PIPE, NULL);
-			if (!root)
-				root = pipe_node;
+			{
+				root = node;
+				attach = root;
+			}
 			else
 			{
-				pipe_node->left = root;
-				root = pipe_node;
+				attach->right = node;
+				attach = node;
 			}
-			current = current->next;
 		}
-		else if (current->type == REDIR_IN || current->type == REDIR_OUT
-			|| current->type == REDIR_OUT_APPEND || current->type == HEREDOC)
+		else if (is_redir_token(tokens->type))
 		{
-			redir_node = parse_redirection(&current);
-			if (cmd_node)
-				cmd_node->right = redir_node;
+			redir_node = parse_redirection(&tokens);
+			if (!redir_node)
+			{
+				free_ast(root);
+				return (NULL);
+			}
+			if (!attach)
+			{
+				free_ast(redir_node);
+				free_ast(root);
+				return (NULL);
+			}
+			if (attach->right)
+			{
+				redir_node->left = attach->right;
+			}
+			attach->right = redir_node;
+		}
+		else if (tokens->type == PIPE)
+		{
+			if (!root || !tokens->next)
+			{
+				free_ast(root);
+				return (NULL);
+			}
+			node = new_ast_node(NODE_PIPE, NULL);
+			if (!node)
+			{
+				free_ast(root);
+				return (NULL);
+			}
+			node->left = root;
+			root = node;
+			attach = node;
+			tokens = tokens->next;
 		}
 		else
-			current = current->next;
+			tokens = tokens->next;
 	}
 	return (root);
 }

@@ -17,10 +17,17 @@ t_token	*new_token(char *value, t_toktype type)
 {
 	t_token	*tok;
 
+	if (!value)
+		return (NULL);
+
 	tok = malloc(sizeof(t_token));
 	if (!tok)
 		return (NULL);
+
 	tok->value = ft_strdup(value);
+	if (!tok->value)
+		return (free(tok), NULL);
+
 	tok->type = type;
 	tok->next = NULL;
 	return (tok);
@@ -30,11 +37,15 @@ void	token_add_back(t_token **lst, t_token *new)
 {
 	t_token	*tmp;
 
+	if (!lst || !new)
+		return ;
+
 	if (!*lst)
 	{
 		*lst = new;
 		return ;
 	}
+
 	tmp = *lst;
 	while (tmp->next)
 		tmp = tmp->next;

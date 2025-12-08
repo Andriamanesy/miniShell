@@ -21,10 +21,12 @@ char	*parse_quotes(char *s, int *i)
 
 	quote = s[*i];
 	start = ++(*i);
+
 	while (s[*i] && s[*i] != quote)
 		(*i)++;
+	if (s[*i] != quote)
+		return (NULL);
 	word = ft_substr(s, start, *i - start);
-	if (s[*i] == quote)
-		(*i)++;
+	(*i)++;
 	return (word);
 }

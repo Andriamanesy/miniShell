@@ -26,7 +26,10 @@ t_env	*env_to_list(char **envp)
 	{
 		eq = ft_strchr(envp[i], '=');
 		if (!eq)
+		{
+			i++;
 			continue ;
+		}
 		tmp = malloc(sizeof(t_env));
 		tmp->key = ft_substr(envp[i], 0, eq - envp[i]);
 		tmp->value = ft_strdup(eq + 1);
@@ -54,6 +57,7 @@ char	**list_to_envp(t_env *env)
 		tmp = tmp->next;
 	}
 	envp = malloc(sizeof(char *) * (count + 1));
+	tmp = env;
 	while (tmp)
 	{
 		envp[i] = ft_strjoin(tmp->key, "=");

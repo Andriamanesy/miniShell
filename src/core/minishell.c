@@ -53,6 +53,7 @@ void	process_input(char *line, t_env *env)
 	if (!tokens)
 	{
 		ft_putstr_fd("Lexer error\n", 2);
+		free_tokens(tokens);
 		return ;
 	}
 	ast = parse(tokens);
@@ -62,6 +63,7 @@ void	process_input(char *line, t_env *env)
 		return ;
 	}
 	print_ast(ast, 0);
+	free_tokens(tokens);
 	free_ast(ast);
 }
 
