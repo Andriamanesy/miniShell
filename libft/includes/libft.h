@@ -76,5 +76,7 @@ int		ft_print_addr(uintptr_t addr);
 int		ft_formats(va_list args, const char format);
 int		ft_print_unsigned(unsigned int nb);
 int		ft_printf(const char *str, ...);
+int		ft_strcmp(const char *s1, const char *s2);
+
 
 #endif

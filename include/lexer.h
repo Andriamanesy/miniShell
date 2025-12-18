@@ -12,6 +12,9 @@
 
 #ifndef LEXER_H
 # define LEXER_H
+#include "env.h"
+#include "parser.h"
+extern int g_last_exit_code;
 
 typedef enum e_toktype
 {
@@ -30,13 +33,15 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-t_token				*lexer(char *input);
-t_token				*tokenize(char *input);
 t_token				*new_token(char *value, t_toktype type);
 void				token_add_back(t_token **lst, t_token *new_tok);
 void				free_tokens(t_token *lst);
 int					is_operator_char(char c);
 int					is_whitespace(char c);
-char				*parse_quotes(char *s, int *i);
+char				*clear_quotes(char *s);
+void				clear_quotes_in_tokens(t_token *tokens);
+char    *parse_quotes(char *s, int *i, t_env *env);
+t_token *tokenize(char *input, t_env *env);
+t_token *lexer(char *input, t_env *env);
 
 #endif

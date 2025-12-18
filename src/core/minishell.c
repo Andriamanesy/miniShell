@@ -14,10 +14,13 @@
 #include "../../include/lexer.h"
 #include "../../include/parser.h"
 #include "../../include/executor.h"
+#include "../../include/expander.h"
 #include <stdio.h>
 
 void	process_input(char *line, t_env *env);
 void	handle_exit(t_env *env);
+
+int g_last_exit_code = 0;
 
 int	minishell(char **envp)
 {
@@ -34,7 +37,7 @@ int	minishell(char **envp)
 	{
 		line = readline("minishell$ ");
 		if (!line)
-			handle_exit(my_env);
+			break ;
 		if (*line)
 			add_history(line);
 		process_input(line, my_env);
@@ -43,28 +46,52 @@ int	minishell(char **envp)
 	return (0);
 }
 
-void	process_input(char *line, t_env *env)
+void free_char_array(char **arr)
 {
-	t_token	*tokens;
-	t_ast	*ast;
+    int i = 0;
+    if (!arr) return;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
+}
 
-	( void )env;
-	tokens = lexer(line);
-	if (!tokens)
-	{
-		ft_putstr_fd("Lexer error\n", 2);
-		free_tokens(tokens);
-		return ;
-	}
-	ast = parse(tokens);
-	if (!ast)
-	{
-		ft_putstr_fd("Parser error\n", 2);
-		return ;
-	}
-	print_ast(ast, 0);
-	free_tokens(tokens);
-	free_ast(ast);
+void process_input(char *line, t_env *env)
+{
+    t_token *tokens;
+    t_ast   *ast;
+
+    if (!line || !*line)
+        return;
+
+    // Tokenisation (on passe directement t_env *)
+    tokens = tokenize(line, env);
+    if (!tokens)
+    {
+        ft_putstr_fd("Lexer error\n", 2);
+        return;
+    }
+
+    // Expansion des variables ($VAR, $USER, $?) → utiliser t_env *
+    expand_variables(tokens, env);
+
+    // Parsing en AST
+    ast = parse(tokens);
+    if (!ast)
+    {
+        ft_putstr_fd("Parser error\n", 2);
+        free_tokens(tokens);
+        return;
+    }
+
+    // Debug : afficher l'AST
+    print_ast(ast, 0);
+
+    // Libération mémoire
+    free_tokens(tokens);
+    free_ast(ast);
 }
 
 void	handle_exit(t_env *env)

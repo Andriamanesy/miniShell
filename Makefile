@@ -55,6 +55,7 @@ SRC = \
 	$(SRC_DIR)/env/env_init.c \
 	$(SRC_DIR)/env/env_utils.c \
 	$(SRC_DIR)/env/env_convert.c \
+	$(SRC_DIR)/env/env_get.c \
 	\
 	$(SRC_DIR)/utils/memory_utils.c \
 	$(SRC_DIR)/utils/string_utils.c \
@@ -71,7 +72,7 @@ COLOR_Red      = \033[31m
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) -lreadline -o $@ $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -lreadline -o $@
 	@echo "$(COLOR_BoldCyan)Executable created: $(NAME)$(COLOR_Reset)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

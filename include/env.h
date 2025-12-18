@@ -30,5 +30,8 @@ t_env				*get_env_node(t_env *env, char *key);
 char				*get_env_value(t_env *env, char *key);
 
 void				free_env(t_env *env);
+char				*env_get(t_env *env, const char *name);
+
 
 #endif
+

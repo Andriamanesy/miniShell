@@ -39,6 +39,7 @@ typedef struct s_ast
 	char		**argv;
 	struct s_ast	*left;
 	struct s_ast	*right;
+	struct s_ast	*redir;
 }	t_ast;
 
 t_ast				*parse(t_token *tokens);

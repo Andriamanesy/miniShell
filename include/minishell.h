@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+char **env_to_array(t_env *env);
 int	minishell(char **envp);
 
 #endif

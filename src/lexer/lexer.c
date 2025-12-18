@@ -13,10 +13,11 @@
 #include "../../include/lexer.h"
 #include <stdlib.h>
 
-t_token	*lexer(char *input)
+t_token *lexer(char *input, t_env *env)
 {
-	if (!input || !*input)
-		return (NULL);
-	return (tokenize(input));
+    if (!input || !*input)
+        return NULL;
+    return tokenize(input, env);
 }
+
 

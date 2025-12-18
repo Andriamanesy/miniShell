@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "../../include/env.h"
+#include "../../include/env.h"
+#include <string.h> // pour strcmp
+#include <stdlib.h>
+
 
 t_env	*get_env_node(t_env *env, char *key)
 {
@@ -32,3 +36,16 @@ char	*get_env_value(t_env *env, char *key)
 		return (node->value);
 	return (NULL);
 }
+
+char *env_get(t_env *env, const char *name)
+{
+    while (env)
+    {
+        if (strcmp(env->key, name) == 0)
+            return env->value; // retourne la valeur trouvée
+        env = env->next;
+    }
+    return NULL; // non trouvé
+}
+
+
