@@ -6,18 +6,37 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:10:50 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/29 14:27:11 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 00:13:55 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-int	is_whitespace(char c)
+bool	is_space(char c)
 {
-	return (c == ' ' || c == '\t');
+	if (c && (c == ' ' || c == '\n' || c == '\r' || c == '\f' || c == '\t' \
+	|| c == '\v'))
+		return (true);
+	return (false);
 }
 
-int	is_operator_char(char c)
+int	is_special(char *str)
 {
-	return (c == '|' || c == '<' || c == '>');
+	if (str && *str && ft_strlen(str) >= 2)
+	{
+		if (!ft_strncmp(str, "<<", 2))
+			return (HEREDOC);
+		if (!ft_strncmp(str, ">>", 2))
+			return (APPEND);
+	}
+	if (*str && ft_strlen(str) >= 1)
+	{
+		if (!ft_strncmp(str, "<", 1))
+			return (INPUT);
+		if (!ft_strncmp(str, ">", 1))
+			return (TRUNC);
+		if (!ft_strncmp(str, "|", 1))
+			return (PIPE);
+	}
+	return (0);
 }

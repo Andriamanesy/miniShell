@@ -6,37 +6,115 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:11:16 by briandri          #+#    #+#             */
-/*   Updated: 2025/12/02 09:49:08 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 02:29:54 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
+#include "../../include/expander.h"
+#include "../../include/utils.h"
 
-t_ast	*parse_redirection(t_token **tokens)
+static int	open_file(t_data *data, char *filename, int type)
 {
-	t_ast		*redir;
-	t_token		*cur;
-	t_node_type	type;
+	int	fd;
 
-	if (!tokens || !*tokens)
-		return (NULL);
-	cur = *tokens;
-	if (cur->type == REDIR_OUT)
-		type = NODE_REDIR_OUT;
-	else if (cur->type == REDIR_OUT_APPEND)
-		type = NODE_REDIR_OUT_APPEND;
-	else if (cur->type == REDIR_IN)
-		type = NODE_REDIR_IN;
-	else if (cur->type == HEREDOC)
-		type = NODE_HEREDOC;
-	else
-		return (NULL);
-	cur = cur->next;
-	if (!cur || cur->type != WORD)
-		return (NULL);
-	redir = new_ast_node(type, cur->value);
-	if (!redir)
-		return (NULL);
-	*tokens = cur->next;
-	return (redir);
+	fd = -2;
+	if (type == INPUT)
+		fd = open(filename, O_RDONLY, 0644);
+	else if (type == HEREDOC)
+		fd = here_doc(data, filename);
+	else if (type == TRUNC)
+		fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	else if (type == APPEND)
+		fd = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (type != HEREDOC && fd < 0)
+		perror(filename);
+	return (fd);
 }
+
+static bool	get_in(t_data *data, t_token *tmp, t_cmd *cmd)
+{
+	if (tmp->type == INPUT)
+	{
+		if (cmd->infile >= 0)
+			close(cmd->infile);
+		if (tmp == tmp->next || tmp->next->type <= 5)
+			return (print_error_token(tmp, data));
+		cmd->infile = open_file(data, tmp->next->str, INPUT);
+		if (cmd->infile == -1)
+			return (false);
+	}
+	else if (tmp->type == HEREDOC)
+	{
+		if (cmd->infile >= 0)
+			close(cmd->infile);
+		if (tmp == tmp->next || tmp->next->type <= 5)
+			return (print_error_token(tmp, data));
+		cmd->infile = open_file(data, tmp->next->str, HEREDOC);
+		if (cmd->infile == -1)
+			return (false);
+	}
+	return (true);
+}
+
+bool	get_infile(t_data *data, t_token *token, t_cmd *cmd)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	if (tmp->type != PIPE && !get_in(data, tmp, cmd))
+		return (false);
+	if (tmp->type == PIPE)
+		return (true);
+	tmp = tmp->next;
+	while (tmp->type != PIPE && tmp != data->token)
+	{
+		if (!get_in(data, tmp, cmd))
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
+}
+
+static bool	get_out(t_token *tmp, t_cmd *cmd, t_data *data)
+{
+	if (tmp->type == TRUNC)
+	{
+		if (cmd->outfile >= 0)
+			close(cmd->outfile);
+		if (tmp == tmp->next || tmp->next->type <= 5)
+			return (print_error_token(tmp, data));
+		cmd->outfile = open_file(NULL, tmp->next->str, TRUNC);
+		if (cmd->outfile == -1)
+			return (false);
+	}
+	else if (tmp->type == APPEND)
+	{
+		if (cmd->outfile >= 0)
+			close(cmd->outfile);
+		if (tmp == tmp->next || tmp->next->type <= 5)
+			return (print_error_token(tmp, data));
+		cmd->outfile = open_file(NULL, tmp->next->str, APPEND);
+		if (cmd->outfile == -1)
+			return (false);
+	}
+	return (true);
+}
+
+bool	get_outfile(t_token *token, t_cmd *cmd, t_data *data)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	if (tmp->type != PIPE && !get_out(tmp, cmd, data))
+		return (false);
+	tmp = tmp->next;
+	while (tmp != data->token && tmp->type != PIPE)
+	{
+		if (!get_out(tmp, cmd, data))
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
+}
+

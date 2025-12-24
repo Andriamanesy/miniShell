@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/01 09:56:07 by briandri          #+#    #+#             */
-/*   Updated: 2025/04/23 06:18:44 by briandri         ###   ########.fr       */
+/*   Created: 2025/04/24 17:01:21 by briandri          #+#    #+#             */
+/*   Updated: 2025/04/30 17:10:39 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
-int	ft_printf(const char *str, ...)
-{
-	int		i;
-	va_list	args;
-	int		len;
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_calloc(size_t element_count, size_t element_size);
 
-	i = 0;
-	len = 0;
-	va_start(args, str);
-	if (str == NULL)
-		return (-1);
-	while (str[i])
-	{
-		if (str[i] == '%')
-		{
-			len += ft_formats(args, str[i + 1]);
-			i++;
-		}
-		else
-			len += ft_print_char(str[i]);
-		i++;
-	}
-	va_end(args);
-	return (len);
-}
+#endif

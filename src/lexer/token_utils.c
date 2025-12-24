@@ -6,61 +6,73 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 07:41:24 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/29 14:27:24 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 02:28:24 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 #include "../../libft/includes/libft.h"
 
-t_token	*new_token(char *value, t_toktype type)
+static int	token_new_elem(t_token **new, char *str, int type)
 {
-	t_token	*tok;
-
-	if (!value)
-		return (NULL);
-
-	tok = malloc(sizeof(t_token));
-	if (!tok)
-		return (NULL);
-
-	tok->value = ft_strdup(value);
-	if (!tok->value)
-		return (free(tok), NULL);
-
-	tok->type = type;
-	tok->next = NULL;
-	return (tok);
+	if (!str)
+		return (0);
+	(*new) = malloc(sizeof(t_token));
+	if (*new == NULL)
+	{
+		free(str);
+		return (0);
+	}
+	(*new)->str = str;
+	(*new)->type = type;
+	(*new)->next = NULL;
+	(*new)->prev = NULL;
+	return (1);
 }
 
-void	token_add_back(t_token **lst, t_token *new)
+static void	add_first(t_token **list, t_token *new)
+{
+	(*list) = new;
+	(*list)->prev = *list;
+	(*list)->next = *list;
+}
+
+int	append_token(t_token **list, char *str, int type)
+{
+	t_token	*new;
+
+	if (!token_new_elem(&new, str, type))
+		return (0);
+	if (!(*list))
+		add_first(list, new);
+	else
+	{
+		new->prev = (*list)->prev;
+		new->next = (*list);
+		(*list)->prev->next = new;
+		(*list)->prev = new;
+	}
+	return (1);
+}
+
+void	free_token(t_token **list)
 {
 	t_token	*tmp;
+	t_token	*current;
 
-	if (!lst || !new)
+	if (!(*list))
 		return ;
-
-	if (!*lst)
+	current = *list;
+	while (current->next != *list)
 	{
-		*lst = new;
-		return ;
+		tmp = current;
+		current = current->next;
+		free(tmp->str);
+		free(tmp);
 	}
-
-	tmp = *lst;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
+	free(current->str);
+	free(current);
+	*list = NULL;
 }
 
-void	free_tokens(t_token *lst)
-{
-	t_token	*tmp;
 
-	while (lst)
-	{
-		tmp = lst->next;
-		free(lst->value);
-		free(lst);
-		lst = tmp;
-	}
-}

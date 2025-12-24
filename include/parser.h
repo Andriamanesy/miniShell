@@ -6,50 +6,25 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:08:26 by briandri          #+#    #+#             */
-/*   Updated: 2025/12/02 09:48:06 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:05:44 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
-
-# include "env.h"
 # include "../../libft/includes/libft.h"
-# include "lexer.h"
-# include <stdlib.h>
-# include <stdio.h>
+# include "minishell.h"
 
-typedef struct s_token t_token;
-typedef enum e_toktype t_toktype;
+bool	create_list_cmd(t_data *data);
+char	**get_param(t_data *data, t_token *token);
 
-typedef enum e_node_type
-{
-	NODE_COMMAND,
-	NODE_PIPE,
-	NODE_REDIR_OUT,
-	NODE_REDIR_OUT_APPEND,
-	NODE_REDIR_IN,
-	NODE_HEREDOC
-}	t_node_type;
+bool	get_infile(t_data *data, t_token *token, t_cmd *cmd);
+bool	get_outfile(t_token *token, t_cmd *cmd, t_data *data);
 
-typedef struct s_ast
-{
-	t_node_type	type;
-	char		*value;
-	char		**argv;
-	struct s_ast	*left;
-	struct s_ast	*right;
-	struct s_ast	*redir;
-}	t_ast;
-
-t_ast				*parse(t_token *tokens);
-t_ast				*new_ast_node(t_node_type type, const char *value);
-void				free_ast(t_ast *ast);
-t_ast				*build_command_node(t_token **tokens);
-t_ast				*parse_redirection(t_token **tokens);
-t_ast				*build_ast(t_token *tokens);
-void				print_ast(t_ast *ast, int level);
-int				is_redir_token(t_toktype type);
-void				free_argv(char **argv);
+int		append_cmd(t_cmd **list, int infile, int outfile, char **cmd_param);
+void	free_cmd(t_cmd **list);
+size_t	len_cmd(t_cmd *list);
+bool	check_pipe(t_data *data);
+bool	parseline(t_data *data, char *line);
 
 #endif

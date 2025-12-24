@@ -6,52 +6,56 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:10:58 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/30 13:32:24 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 01:08:03 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
-#include "../../libft/includes/libft.h"
 #include "../../include/expander.h"
+#include "../../include/utils.h"
 
-char *clear_quotes(char *s)
+void	quoting_choice(bool *dq, bool *sq, int *index, char c)
 {
-    int i = 0, j = 0;
-    char *res = malloc(strlen(s) + 1);
-    if (!res)
-        return NULL;
-    while (s[i])
-    {
-        if (s[i] != '"' && s[i] != '\'')
-            res[j++] = s[i];
-        i++;
-    }
-    res[j] = '\0';
-    return res;
+	if ((c == '\'' || c == '"') && !*sq && !*dq)
+	{
+		if (c == '\'' && !*dq)
+			*sq = true;
+		else if (c == '"' && !*sq)
+			*dq = true;
+		if (index)
+			++(*index);
+	}
+	else if ((c == '\'' || c == '"'))
+	{
+		if (c == '\'' && !*dq && *sq)
+			*sq = false;
+		else if (c == '"' && !*sq && *dq)
+			*dq = false;
+		if (index)
+			++(*index);
+	}
 }
 
-void clear_quotes_in_tokens(t_token *tokens)
+int	open_quote(t_data *data, char *line)
 {
-    t_token *cur = tokens;
-    char *tmp;
+	bool	dq;
+	bool	sq;
+	int		i;
 
-    while (cur)
-    {
-        if (cur->type == WORD)
-        {
-            tmp = clear_quotes(cur->value);
-            free(cur->value);
-            cur->value = tmp;
-        }
-        cur = cur->next;
-    }
+	i = 0;
+	dq = false;
+	sq = false;
+	while (line && line[i])
+	{
+		quoting_choice(&dq, &sq, &i, line[i]);
+		if (line[i] && line[i] != '\'' && line[i] != '"')
+			++i;
+	}
+	if (dq || sq)
+	{
+		print_error("open quote\n");
+		data->exit_code = 2;
+		return (1);
+	}
+	return (0);
 }
-
-char *ft_strjoin_free(char *s1, char *s2)
-{
-    char *res = ft_strjoin(s1, s2);
-    free(s1);
-    return res;
-}
-
-

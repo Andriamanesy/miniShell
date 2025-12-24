@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 10:16:30 by briandri          #+#    #+#             */
-/*   Updated: 2025/03/19 10:16:41 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 02:39:41 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 
 typedef struct s_list
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+    char *content;
+    struct s_list *next;
+} t_list;
+
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -75,7 +76,6 @@ int		ft_print_decimal(int nbr);
 int		ft_print_addr(uintptr_t addr);
 int		ft_formats(va_list args, const char format);
 int		ft_print_unsigned(unsigned int nb);
-int		ft_printf(const char *str, ...);
 int		ft_strcmp(const char *s1, const char *s2);
 
 

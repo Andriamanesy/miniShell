@@ -6,7 +6,7 @@
 #    By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/04 19:02:28 by briandri          #+#    #+#              #
-#    Updated: 2025/08/09 15:53:29 by briandri         ###   ########.fr        #
+#    Updated: 2025/12/23 08:57:13 by briandri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRC = srcs/ft_isalpha.c srcs/ft_isdigit.c srcs/ft_isalnum.c srcs/ft_isascii.c sr
 	srcs/ft_strlcpy.c srcs/ft_strlcat.c srcs/ft_strchr.c srcs/ft_strrchr.c srcs/ft_strncmp.c srcs/ft_memchr.c \
 	srcs/ft_memcmp.c srcs/ft_strnstr.c srcs/ft_strdup.c srcs/ft_calloc.c srcs/ft_substr.c srcs/ft_strjoin.c srcs/ft_strtrim.c \
 	srcs/ft_split.c srcs/ft_strmapi.c srcs/ft_itoa.c srcs/ft_striteri.c srcs/ft_putchar_fd.c srcs/ft_putstr_fd.c srcs/ft_putendl_fd.c srcs/ft_putnbr_fd.c \
-	srcs/ft_print_char.c srcs/ft_print_unsigned.c srcs/ft_print_decimal.c srcs/ft_printf.c srcs/ft_formats.c srcs/ft_print_hex.c \
-	srcs/ft_print_percent.c srcs/ft_print_addr.c srcs/ft_print_str.c srcs/ft_strcmp.c
+	srcs/ft_print_char.c srcs/ft_print_unsigned.c srcs/ft_print_decimal.c srcs/ft_formats.c srcs/ft_print_hex.c \
+	srcs/ft_print_percent.c srcs/ft_print_addr.c srcs/ft_print_str.c srcs/ft_strcmp.c srcs/get_next_line.c srcs/get_next_line_utils.c
 
 SRC_BONUS = srcs/ft_lstnew_bonus.c srcs/ft_lstadd_front_bonus.c srcs/ft_lstlast_bonus.c srcs/ft_lstsize_bonus.c srcs/ft_lstadd_back_bonus.c \
 	srcs/ft_lstdelone_bonus.c srcs/ft_lstclear_bonus.c srcs/ft_lstiter_bonus.c

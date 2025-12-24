@@ -6,67 +6,47 @@
 /*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 15:09:48 by briandri          #+#    #+#             */
-/*   Updated: 2025/11/30 13:10:32 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 02:37:31 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/env.h"
+#include "../../include/minishell.h"
+#include "../../include/utils.h"
 
-t_env	*env_to_list(char **envp)
+int	make_env(t_data *data, char **env)
 {
-	t_env	*head;
-	t_env	*tmp;
-	char	*eq;
+	t_mlist	*list;
 	int		i;
+	char	*tmp;
 
-	head = NULL;
-	tmp = NULL;
-	i = 0;
-	while (envp[i])
+	if (!(*env))
+		return (make_env2(data));
+	i = -1;
+	list = NULL;
+	while (env[++i])
 	{
-		eq = ft_strchr(envp[i], '=');
-		if (!eq)
-		{
-			i++;
-			continue ;
-		}
-		tmp = malloc(sizeof(t_env));
-		tmp->key = ft_substr(envp[i], 0, eq - envp[i]);
-		tmp->value = ft_strdup(eq + 1);
-		tmp->next = head;
-		head = tmp;
-		i++;
+		tmp = ft_strdup(env[i]);
+		if (!tmp)
+			return (free_list(&list));
+		if (!append(&list, tmp))
+			return (free_list(&list));
 	}
-	return (head);
+	data->env = list;
+	return (1);
 }
 
-char	**list_to_envp(t_env *env)
+bool	make_env2(t_data *data)
 {
-	int		count;
-	t_env	*tmp;
-	int		i;
-	char	**envp;
-	char	*tmp2;
+	char	path[PATH_MAX];
+	char	*tmp;
 
-	count = 0;
-	tmp = env;
-	i = 0;
-	while (tmp)
-	{
-		count++;
-		tmp = tmp->next;
-	}
-	envp = malloc(sizeof(char *) * (count + 1));
-	tmp = env;
-	while (tmp)
-	{
-		envp[i] = ft_strjoin(tmp->key, "=");
-		tmp2 = envp[i];
-		envp[i] = ft_strjoin(envp[i], tmp->value);
-		free(tmp2);
-		i++;
-		tmp = tmp->next;
-	}
-	envp[i] = NULL;
-	return (envp);
+	tmp = ft_strdup("OLDPWD");
+	if (!tmp || !append(&(data->env), tmp) || getcwd(path, PATH_MAX) == NULL)
+		free_all(data, ERR_MALLOC, EXT_MALLOC);
+	tmp = ft_strjoin("PWD=", path);
+	if (!tmp || !append(&(data->env), tmp))
+		free_all(data, ERR_MALLOC, EXT_MALLOC);
+	return (1);
 }
+

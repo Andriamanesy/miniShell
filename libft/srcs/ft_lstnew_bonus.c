@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: briandri <briandri@student.42antanana      +#+  +:+       +#+        */
+/*   By: briandri <briandri@student.42antananarivo. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:26:35 by briandri          #+#    #+#             */
-/*   Updated: 2025/03/18 16:06:19 by briandri         ###   ########.fr       */
+/*   Updated: 2025/12/24 02:39:41 by briandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
